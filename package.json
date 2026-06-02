@@ -1,0 +1,25 @@
+{
+  "name": "youtube-replica",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/pratibhak3110/YouTube-Replica#readme",
+  "bugs": {
+    "url": "https://github.com/pratibhak3110/YouTube-Replica/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pratibhak3110/YouTube-Replica.git"
+  },
+  "license": "ISC",
+  "author": "Pratibha",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14"
+  }
+}
