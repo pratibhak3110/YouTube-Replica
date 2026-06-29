@@ -1,10 +1,7 @@
 
 import connectDB from "./db/db.js";
 import dotenv from "dotenv";
-
-import express from "express";
-
-const app = express();
+import { app } from "./app.js";
 import dns from 'node:dns/promises';
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
