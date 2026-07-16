@@ -1,5 +1,6 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import { User } from "../models/user.model.js";
 
 const registerUser = asyncHandler(async (req, res) => {
     console.log("Req body", req.body);
@@ -24,31 +25,32 @@ const registerUser = asyncHandler(async (req, res) => {
         ]
     })
 
+    console.log("userExists", userExists);
     if (userExists) {
         return res.status(409).json({
             message: "User already exists",
             status: 409
         })
     }
-
-    const avatarLocalPath = req.files?.avatar[0]?.path;
-    const coverImageLocalPath = req.files?.coverImage[0]?.path;
+console.log("Req files", req.files);
+    const avatarLocalPath = req.files?.avatar?.[0]?.path;
+    const coverImageLocalPath = req.files?.coverImage?.[0]?.path;
 
     if (!avatarLocalPath) {
         return res.status(400).json({
             message: "Avatar is required",
             status: 400
-        })
+        });
     }
 
-    const avtar = await uploadOnCloudinary(avatarLocalPath);
-    const coverImage = await uploadOnCloudinary(coverImageLocalPath);
+    const avatar = await uploadOnCloudinary(avatarLocalPath);
+    const coverImage = coverImageLocalPath ? await uploadOnCloudinary(coverImageLocalPath) : null;
 
-    if (!avtar) {
+    if (!avatar) {
         return res.status(400).json({
             message: "Avatar is required",
             status: 400
-        })
+        });
     }
 
     const user = await User.create({
